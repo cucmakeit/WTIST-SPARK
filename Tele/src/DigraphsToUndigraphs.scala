@@ -44,15 +44,6 @@ object DigraphToUndigraph{
     return outArray
   }
 
-  def printArray(theArray: ArrayBuffer[Double]) :String={
-    val buff = new StringBuffer()
-    val num = theArray.length
-    for (i <- 0 until num-1){
-      buff.append(theArray(i)).append(',')
-    }
-    buff.append(theArray(num-1))
-    return buff.toString
-  }
 
   def main(args: Array[String]){
     if (args.length < 3){
@@ -77,7 +68,7 @@ object DigraphToUndigraph{
       }.groupByKey().map{ x =>
         (x._1,calculate(x._2.toArray,args))
       }.map{x =>
-        x._1+'\t'+printArray(x._2)}.saveAsTextFile(args(2))
+        x._1+'\t'+x._2.mkString(",")}.saveAsTextFile(args(2))
     }
     sc.stop()
   }
